@@ -1,6 +1,6 @@
-import request from 'supertest';
+const request = require('supertest');
 
-import app from '../src/app';
+const app = require('../src/app');
 
 describe('app', () => {
   it('responds with a not found message', (done) => {
@@ -19,7 +19,7 @@ describe('GET /', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, {
-        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+        message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
       }, done);
   });
 });
