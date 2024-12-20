@@ -15,6 +15,10 @@ class Config:
     DB_HOST = os.environ.get('DB_HOST')
     DB_PORT = os.environ.get('DB_PORT')
     DB_NAME = os.environ.get('DB_NAME')
+    PL_CLUB_DATA_URL = os.environ.get('PL_CLUB_DATA_URL')
+    PL_PLAYER_DATA_URL = os.environ.get('PL_PLAYER_DATA_URL')
+    PL_GK_URL = os.environ.get('PL_GK_URL')
+    PL_DEF_URL = os.environ.get('PL_DEF_URL')
 
     def __init__(self):
         '''dunder init'''
