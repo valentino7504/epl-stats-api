@@ -4,139 +4,179 @@
         "Nickname": "The Gunners",
         "Stadium Capacity": 60704,
         "Manager": "Mikel Arteta",
-        "Captain": "Martin Ødegaard"
+        "Captain": "Martin Ødegaard",
+        "Founded": 1886,
+        "City": "London"
     },
     "Aston Villa": {
         "Stadium": "Villa Park",
         "Nickname": "The Villans",
         "Stadium Capacity": 42918,
         "Manager": "Unai Emery",
-        "Captain": "John McGinn"
+        "Captain": "John McGinn",
+        "Founded": 1874,
+        "City": "Birmingham"
     },
     "Bournemouth": {
         "Stadium": "Vitality Stadium",
         "Nickname": "The Cherries",
         "Stadium Capacity": 11307,
         "Manager": "Andoni Iraola",
-        "Captain": "Adam Smith"
+        "Captain": "Adam Smith",
+        "Founded": 1899,
+        "City": "Bournemouth"
     },
     "Brentford": {
         "Stadium": "Gtech Community Stadium",
         "Nickname": "The Bees",
         "Stadium Capacity": 17250,
         "Manager": "Thomas Frank",
-        "Captain": "Christian Nørgaard"
+        "Captain": "Christian Nørgaard",
+        "Founded": 1889,
+        "City": "London"
     },
     "Brighton": {
         "Stadium": "American Express Community Stadium",
         "Nickname": "The Seagulls",
         "Stadium Capacity": 31876,
         "Manager": "Fabian Hürzeler",
-        "Captain": "Lewis Dunk"
+        "Captain": "Lewis Dunk",
+        "Founded": 1901,
+        "City": "Brighton"
     },
     "Chelsea": {
         "Stadium": "Stamford Bridge",
         "Nickname": "The Blues",
         "Stadium Capacity": 40173,
         "Manager": "Enzo Maresca",
-        "Captain": "Reece James"
+        "Captain": "Reece James",
+        "Founded": 1905,
+        "City": "London"
     },
     "Crystal Palace": {
         "Stadium": "Selhurst Park",
         "Nickname": "The Eagles",
         "Stadium Capacity": 25194,
         "Manager": "Oliver Glasner",
-        "Captain": "Marc Guéhi"
+        "Captain": "Marc Guéhi",
+        "Founded": 1905,
+        "City": "London"
     },
     "Everton": {
         "Stadium": "Goodison Park",
         "Nickname": "The Toffees",
         "Stadium Capacity": 39414,
         "Manager": "Sean Dyche",
-        "Captain": "Séamus Coleman"
+        "Captain": "Séamus Coleman",
+        "Founded": 1878,
+        "City": "Liverpool"
     },
     "Fulham": {
         "Stadium": "Craven Cottage",
         "Nickname": "The Cottagers",
         "Stadium Capacity": 24500,
         "Manager": "Marco Silva",
-        "Captain": "Tom Cairney"
+        "Captain": "Tom Cairney",
+        "Founded": 1879,
+        "City": "London"
     },
     "Ipswich Town": {
         "Stadium": "Portman Road",
         "Nickname": "The Tractor Boys",
         "Stadium Capacity": 30017,
         "Manager": "Kieran McKenna",
-        "Captain": "Sam Morsy"
+        "Captain": "Sam Morsy",
+        "Founded": 1878,
+        "City": "Ipswich"
     },
     "Leicester City": {
         "Stadium": "King Power Stadium",
         "Nickname": "The Foxes",
         "Stadium Capacity": 32259,
         "Manager": "Ruud van Nistelrooy",
-        "Captain": "Jamie Vardy"
+        "Captain": "Jamie Vardy",
+        "Founded": 1884,
+        "City": "Leicester"
     },
     "Liverpool": {
         "Stadium": "Anfield",
         "Nickname": "The Reds",
         "Stadium Capacity": 61276,
         "Manager": "Arne Slot",
-        "Captain": "Virgil van Dijk"
+        "Captain": "Virgil van Dijk",
+        "Founded": 1892,
+        "City": "Liverpool"
     },
     "Manchester City": {
         "Stadium": "Etihad Stadium",
         "Nickname": "The Citizens",
         "Stadium Capacity": 52900,
         "Manager": "Pep Guardiola",
-        "Captain": "Kyle Walker"
+        "Captain": "Kyle Walker",
+        "Founded": 1880,
+        "City": "Manchester"
     },
     "Manchester Utd": {
         "Stadium": "Old Trafford",
         "Nickname": "The Red Devils",
         "Stadium Capacity": 74197,
         "Manager": "Ruben Amorim",
-        "Captain": "Bruno Fernandes"
+        "Captain": "Bruno Fernandes",
+        "Founded": 1878,
+        "City": "Manchester"
     },
     "Newcastle Utd": {
         "Stadium": "St James' Park",
         "Nickname": "The Magpies",
         "Stadium Capacity": 52258,
         "Manager": "Eddie Howe",
-        "Captain": "Bruno Guimarães"
+        "Captain": "Bruno Guimarães",
+        "Founded": 1892,
+        "City": "Newcastle"
     },
     "Nottingham Forest": {
         "Stadium": "City Ground",
         "Nickname": "The Reds",
         "Stadium Capacity": 30404,
         "Manager": "Nuno Espírito Santo",
-        "Captain": "Ryan Yates"
+        "Captain": "Ryan Yates",
+        "Founded": 1865,
+        "City": "Nottingham"
     },
     "Southampton": {
         "Stadium": "St Mary's Stadium",
         "Nickname": "The Saints",
         "Stadium Capacity": 32384,
         "Manager": null,
-        "Captain": "Jack Stephens"
+        "Captain": "Jack Stephens",
+        "Founded": 1885,
+        "City": "Southampton"
     },
     "Tottenham": {
         "Stadium": "Tottenham Hotspur Stadium",
         "Nickname": "Spurs",
         "Stadium Capacity": 62850,
         "Manager": "Ange Postecoglou",
-        "Captain": "Son Heung-min"
+        "Captain": "Son Heung-min",
+        "Founded": 1882,
+        "City": "London"
     },
     "West Ham": {
         "Stadium": "London Stadium",
         "Nickname": "The Hammers",
         "Stadium Capacity": 62500,
         "Manager": "Julen Lopetegui",
-        "Captain": "Jarrod Bowen"
+        "Captain": "Jarrod Bowen",
+        "Founded": 1895,
+        "City": "London"
     },
     "Wolves": {
         "Stadium": "Molineux Stadium",
         "Nickname": "The Wanderers",
         "Stadium Capacity": 31750,
         "Manager": null,
-        "Captain": "Nélson Semedo"
+        "Captain": "Nélson Semedo",
+        "Founded": 1877,
+        "City": "Wolverhampton"
     }
 }
