@@ -56,3 +56,15 @@ class Club(BaseModel):
     nickname: Mapped[str] = mapped_column(String, nullable=True)
     stadium_capacity: Mapped[int] = mapped_column(Integer, nullable=True)
     manager: Mapped[str] = mapped_column(String, nullable=True)
+
+    def to_dict(self, include: list = None, exclude: list = None):
+        '''to_dict method'''
+        data = {
+            col.name: getattr(self, col.name) for col in self.__table__.columns
+        }
+        if include:
+            data = {key: data[key] for key in include if key in data}
+        if exclude:
+            for key in exclude:
+                data.pop(key, None)
+        return data
