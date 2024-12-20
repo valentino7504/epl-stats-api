@@ -9,7 +9,7 @@ Base = declarative_base()
 config = Config()
 
 
-class DB:
+class DBSession:
     '''The DB class'''
 
     def __init__(self) -> None:
@@ -48,6 +48,10 @@ class DB:
         '''commits changes'''
         self.session.commit()
 
+    def execute(self, stmt) -> None:
+        '''executes a statement'''
+        self.session.execute(stmt)
+
     def __enter__(self):
         '''context manager'''
         return self.session
@@ -55,7 +59,3 @@ class DB:
     def __exit__(self):
         '''exit context manager'''
         self.close_session()
-
-
-if __name__ == "__main__":
-    db = DB()
