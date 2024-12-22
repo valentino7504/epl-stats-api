@@ -24,14 +24,13 @@ def upsert_club(club_dict: dict):
     create_dict.pop('top_scorer')
     create_dict.pop('captain')
     stmt = insert(Club).values(**create_dict)
-    stmt = stmt.on_conflict_do_update(
-        index_elements=['name'],
-        set_={
-            col: stmt.excluded[col]
-            for col in create_dict.keys()
-            if col not in ['name', 'founded', 'city']
-        },
-    )
+    set_ = {
+        col: stmt.excluded[col]
+        for col in create_dict.keys()
+        if col not in ['name', 'founded', 'city']
+    }
+    set_['updated_at'] = datetime.now()
+    stmt = stmt.on_conflict_do_update(index_elements=['name'], set_=set_)
     return stmt
 
 
@@ -55,13 +54,14 @@ def upsert_player(db_session: DBSession, player_data: dict):
         if isinstance(value, float) and isnan(value):
             player_data[key] = None
     stmt = insert(Player).values(**player_data)
+    set_ = {
+        col: stmt.excluded[col]
+        for col in player_data.keys()
+        if col not in ['name', 'club_id', 'birth_date']
+    }
+    set_['updated_at'] = datetime.now()
     stmt = stmt.on_conflict_do_update(
-        index_elements=['name', 'club_id'],
-        set_={
-            col: stmt.excluded[col]
-            for col in player_data.keys()
-            if col not in ['name', 'club_id', 'birth_date']
-        },
+        index_elements=['name', 'club_id'], set_=set_
     )
     return stmt
 
