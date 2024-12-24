@@ -78,8 +78,8 @@ PLAYERS_COLUMN_MAPPING = {
     'blocks': 'blocks',
     'save%': 'save_percent',
     'is_captain': 'is_captain',
-    'clearances': 'clearances',
-    'interceptions': 'interceptions',
+    'clr': 'clearances',
+    'int': 'interceptions',
 }
 
 

@@ -82,6 +82,8 @@ class PlayerScraper(BaseScraper):
             [
                 ('Player Details', 'Player'),
                 ('Player Details', 'Squad'),
+                ('Player Details', 'Int'),
+                ('Player Details', 'Clr'),
                 ('Tackles', 'Tkl'),
                 ('Blocks', 'Blocks'),
             ]
