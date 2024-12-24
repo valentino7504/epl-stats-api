@@ -1,29 +1,18 @@
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cors = require('cors');
-
-require('dotenv').config();
-
-const middlewares = require('./middlewares');
-const api = require('./api');
+import express from 'express';
+import cors from 'cors';
+import * as middleware from './utils/middleware.js';
+import playersRouter from './controllers/players.js';
+import clubsRouter from './controllers/clubs.js';
 
 const app = express();
 
-app.use(morgan('dev'));
-app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(middleware.logger);
+app.use('/api/players', playersRouter);
+app.use('/api/clubs', clubsRouter);
 
-app.get('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
-  });
-});
+app.use(middleware.notFound);
+app.use(middleware.errorHandler);
 
-app.use('/api/v1', api);
-
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
-
-module.exports = app;
+export default app;

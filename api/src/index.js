@@ -1,8 +1,7 @@
-const app = require('./app');
+import app from './app.js';
+import { PORT } from './utils/config.js';
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(`Listening: http://localhost:${port}`);
-  /* eslint-enable no-console */
+app.listen(PORT, (err) => {
+  if (err) console.error('Error in server setup:', err.message);
+  console.log('Server listening on port', PORT);
 });
