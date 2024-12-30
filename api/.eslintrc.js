@@ -9,7 +9,7 @@ module.exports = {
     'no-param-reassign': 0,
     'no-return-assign': 0,
     'no-console': 0,
-    'max-len': ['error', { code: 80 }],
+    'no-control-regex': 0,
     camelcase: 0,
     'import/extensions': [
       'error',
@@ -17,5 +17,8 @@ module.exports = {
         js: 'ignorePackages',
       },
     ],
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
   },
 };
