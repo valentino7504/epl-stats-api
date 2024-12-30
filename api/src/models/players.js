@@ -45,7 +45,7 @@ const players = pgTable('players', {
     columns: [table.clubId],
     foreignColumns: [clubs.id],
     name: 'players_club_id_fkey',
-  }),
+  }).onDelete('cascade').onUpdate('cascade'),
   unique('players_name_club_id_key').on(table.name, table.clubId),
 ]);
 
