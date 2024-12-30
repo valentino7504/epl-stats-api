@@ -22,6 +22,34 @@
       "when": 1735042548229,
       "tag": "0002_mysterious_gertrude_yorkes",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1735276622572,
+      "tag": "0003_mature_starhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1735319548420,
+      "tag": "0004_numerous_pete_wisdom",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1735416218451,
+      "tag": "0005_chemical_stone_men",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1735416764990,
+      "tag": "0006_shiny_zaladane",
+      "breakpoints": true
     }
   ]
 }
