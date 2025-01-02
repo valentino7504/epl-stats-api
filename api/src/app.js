@@ -8,6 +8,7 @@ import * as middleware from './utils/middleware.js';
 import playersRouter from './routes/players.js';
 import clubsRouter from './routes/clubs.js';
 import usersRouter from './routes/users.js';
+import collectionsRouter from './routes/collections.js';
 import options from '../docs/swagger.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,6 +22,10 @@ app.use(middleware.stripTimestamps);
 app.use(middleware.normalizeResponse);
 app.use(middleware.formatBirthDate);
 
+app.get('/', (req, res) => {
+  res.redirect('/api/docs');
+});
+
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'assets', 'favicon.ico'));
 });
@@ -28,6 +33,7 @@ app.get('/favicon.ico', (req, res) => {
 app.use('/api/players', playersRouter);
 app.use('/api/clubs', clubsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/collections', collectionsRouter);
 
 const extraOptions = {
   customCss: '.swagger-ui .topbar { display: none }',
