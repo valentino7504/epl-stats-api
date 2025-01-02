@@ -42,6 +42,8 @@ export async function updateUserPassword(token) {
     .set({ hashedPassword: resetToken.hashedPassword, updatedAt: new Date() })
     .where(eq(users.id, resetToken.userId))
     .returning({ id: users.id, email: users.email });
-  resetToken.used = true;
+  await db.update(passwordTokens)
+    .set({ used: true })
+    .where(eq(passwordTokens.token, token));
   return updatedUserArr[0];
 }
