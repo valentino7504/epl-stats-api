@@ -8,10 +8,10 @@ import collections from './collections.js';
 export const clubsToCollections = pgTable(
   'clubs_to_collections',
   {
-    clubId: integer('club_id').notNull().references(() => clubs.id),
+    clubId: integer('club_id').notNull().references(() => clubs.id, { onDelete: 'cascade' }),
     collectionId: integer('collection_id')
       .notNull()
-      .references(() => collections.id),
+      .references(() => collections.id, { onDelete: 'cascade' }),
   },
   (table) => ({
     ok: primaryKey({ columns: [table.clubId, table.collectionId] }),
