@@ -1,5 +1,7 @@
 import 'dotenv/config';
 
+export const { SCHEME } = process.env;
+
 export const { EMAIL_USER } = process.env;
 
 export const { EMAIL_PWD } = process.env;
