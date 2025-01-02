@@ -1,5 +1,6 @@
 import morgan from 'morgan';
 import { ENV } from './config.js';
+import { extractToken, getUserFromToken } from './auth.js';
 
 export const logger = morgan('dev');
 
@@ -45,20 +46,26 @@ export function normalizeResponse(req, res, next) {
 
 export function stripTimestamps(req, res, next) {
   const originalJson = res.json;
-  let newData;
-  res.json = function stripTimeStamps(data) {
+  const strip = (data) => {
     if (Array.isArray(data)) {
-      newData = data.map((item) => {
-        const { createdAt, updatedAt, ...strippedItem } = item;
-        return strippedItem;
-      });
-    } else if (typeof data === 'object' && data !== null) {
+      return data.map((item) => strip(item));
+    } if (typeof data === 'object' && data !== null) {
       const { createdAt, updatedAt, ...strippedData } = data;
-      newData = strippedData;
+      if (Array.isArray(strippedData.players)) {
+        strippedData.players = strippedData.players.map((player) => strip(player));
+      }
+      if (Array.isArray(strippedData.clubs)) {
+        strippedData.clubs = strippedData.clubs.map((club) => strip(club));
+      }
+      return strippedData;
     }
-    return originalJson.call(this, newData);
+    return data;
   };
 
+  res.json = function stripTime(data) {
+    const newData = strip(data);
+    return originalJson.call(this, newData);
+  };
   next();
 }
 
@@ -68,8 +75,8 @@ export function formatBirthDate(req, res, next) {
     if (Array.isArray(data)) {
       data = data.map((item) => {
         const formattedItem = { ...item };
-        if (formattedItem.birthDate) {
-          [formattedItem.birthDate] = formattedItem.birthDate.split(' ');
+        if (formattedItem.birth_date) {
+          [formattedItem.birth_date] = formattedItem.birth_date.split(' ');
         }
         const { createdAt, updatedAt, ...strippedItem } = formattedItem;
         return strippedItem;
@@ -85,4 +92,15 @@ export function formatBirthDate(req, res, next) {
     return originalJson.call(this, data);
   };
   next();
+}
+
+export async function authenticateToken(req, res, next) {
+  try {
+    const token = await extractToken(req);
+    const user = await getUserFromToken(token);
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(401).json({ error: 'Unauthorized', message: err.message }).end();
+  }
 }

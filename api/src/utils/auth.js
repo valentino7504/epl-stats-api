@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { eq } from 'drizzle-orm';
-import { hashSecret } from './secretHashing.js';
+import { eq, sql } from 'drizzle-orm';
+import { hashSecret, verifySecret } from './secretHashing.js';
 import db from './dbManager.js';
 import tokens from '../models/tokens.js';
 
@@ -34,7 +34,7 @@ export async function extractToken(req) {
   if (authHeaderSplit[0] !== 'Bearer' || authHeaderSplit.length < 2) {
     throw new Error('Token malformatted');
   }
-  const token = authHeaderSplit[0];
+  const token = authHeaderSplit[1];
   return token;
 }
 
@@ -51,14 +51,21 @@ export const validateEmailAndPassword = (email, password) => {
 };
 
 export const getUserFromToken = async (token) => {
-  const hashCheck = await hashSecret(token);
-  const userArr = await db.select()
-    .from(users)
-    .innerJoin(tokens, eq(tokens.userId, users.id))
-    .where(tokens.hashedToken === hashCheck);
-  if (userArr.length < 1) {
-    throw new Error('Provided token does not exist');
+  const allTokens = await db.select().from(tokens);
+  /* eslint-disable no-await-in-loop */
+  for (let i = 0; i < allTokens.length; i += 1) {
+    const tokenRecord = allTokens[i];
+    const verified = await verifySecret(tokenRecord.hashedToken, token);
+    if (verified) {
+      const { userId } = tokenRecord;
+      const userArr = await db.select().from(users).where(eq(users.id, userId));
+      if (userArr.length < 1) {
+        throw new Error('Provided token is not linked to any user');
+      }
+      const user = userArr[0];
+      return { email: user.email, id: user.id };
+    }
   }
-  const userObj = userArr[0].users;
-  return { email: userObj.email, id: userObj.id };
+  /* eslint-enable no-await-in-loop */
+  throw new Error('Provided token is not linked to any user');
 };
