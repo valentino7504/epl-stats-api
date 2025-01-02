@@ -1,15 +1,14 @@
 import { Router } from 'express';
-import {
-  extractToken, getUserFromToken, validateEmailAndPassword,
-} from '../utils/auth.js';
+import { validateEmailAndPassword } from '../utils/auth.js';
 import { sendMail, sendWelcomeMail } from '../services/emailService.js';
 import {
   createUser, deleteUser, getUserByEmail, updateUser,
 } from '../services/usersService.js';
 import { verifySecret } from '../utils/secretHashing.js';
-import { assignUserToken, deleteToken, deleteUserTokens } from '../services/tokenService.js';
+import { assignUserToken, deleteUserTokens } from '../services/tokenService.js';
 import { createPasswordToken, updateUserPassword } from '../services/passwordResetTokenService.js';
 import { resetMsg, resetMsgHTML } from '../utils/emailMessages.js';
+import { authenticateToken } from '../utils/middleware.js';
 
 const usersRouter = Router();
 
@@ -25,22 +24,12 @@ usersRouter.post('/signup', async (req, res) => {
   return res.status(201).json(tokenJson);
 });
 
-usersRouter.get('/me', async (req, res) => {
-  let token;
-  try {
-    token = await extractToken(req);
-  } catch (err) {
-    return res.status(401).json({ error: 'Unauthorized', message: err.message });
-  }
-  try {
-    const me = await getUserFromToken(token);
-    return res.status(200).json(me);
-  } catch (err) {
-    return res.status(400).json({ error: 'Bad request', message: err.message });
-  }
+usersRouter.get('/me', authenticateToken, async (req, res) => {
+  const me = req.user;
+  return res.status(200).json(me);
 });
 
-usersRouter.delete('/me', async (req, res) => {
+usersRouter.delete('/me', authenticateToken, async (req, res) => {
   try {
     await deleteUser(req);
     return res.status(204).end();
@@ -49,7 +38,7 @@ usersRouter.delete('/me', async (req, res) => {
   }
 });
 
-usersRouter.put('/me', async (req, res) => {
+usersRouter.post('/me', authenticateToken, async (req, res) => {
   try {
     const updatedUser = await updateUser(req);
     return res.status(200).json(updatedUser);
@@ -75,40 +64,9 @@ usersRouter.post('/generate_token', async (req, res) => {
   return res.status(201).json(tokenJson);
 });
 
-usersRouter.delete('/revoke_token', async (req, res) => {
-  let token;
-  try {
-    token = await extractToken(req);
-  } catch (err) {
-    return res.status(401).json({ error: 'Unauthorized', message: err.message });
-  }
-  try {
-    await deleteToken(token);
-    return res.status(204).end();
-  } catch (err) {
-    return res.status(400).json({ error: 'Not Found', message: 'Token invalid' });
-  }
-});
-
-usersRouter.delete('/revoke_all_tokens', async (req, res) => {
-  const { email, password } = req.body;
-  let user;
-  try {
-    validateEmailAndPassword(email, password);
-    user = await getUserByEmail(email);
-  } catch (err) {
-    return res.status(400).json({ error: 'Bad request', message: err.message });
-  }
-  const verified = await verifySecret(user.hashedPassword, password);
-  if (!verified) {
-    return res.status(401).json({ error: 'Unauthorized', message: 'Invalid password for provided email' });
-  }
-  try {
-    await deleteUserTokens(user);
-    return res.status(204).end();
-  } catch (err) {
-    return res.status(404).json({ error: 'Not Found', message: 'No tokens found for this user' });
-  }
+usersRouter.delete('/revoke_all_tokens', authenticateToken, async (req, res) => {
+  await deleteUserTokens(req.user);
+  return res.status(204).end();
 });
 
 usersRouter.post('/reset_password', async (req, res) => {

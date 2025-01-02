@@ -20,17 +20,13 @@ clubsRouter.get('/', async (req, res, next) => {
   }
 });
 
-clubsRouter.get('/:id', async (req, res, next) => {
+clubsRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const result = await getClubById(id);
-    if (result.length > 0) {
-      res.json(result[0]);
-    } else {
-      res.status(404).json({ error: 'Not Found', message: 'Club does not exist' });
-    }
+    res.status(200).json(result);
   } catch (err) {
-    next(err);
+    res.status(400).json({ error: 'Bad request', message: err.message });
   }
 });
 
