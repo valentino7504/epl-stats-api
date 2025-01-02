@@ -34,7 +34,7 @@ usersRouter.delete('/me', authenticateToken, async (req, res) => {
     await deleteUser(req);
     return res.status(204).end();
   } catch (err) {
-    return res.json({ error: 'Unauthorized', message: err.message });
+    return res.status(401).json({ error: 'Unauthorized', message: err.message });
   }
 });
 

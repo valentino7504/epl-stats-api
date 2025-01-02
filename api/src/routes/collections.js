@@ -64,7 +64,7 @@ collectionsRouter.post('/:id', async (req, res) => {
   const collectionId = req.params.id;
   try {
     const updatedCollection = await updateCollectionMetadata(collectionId, userId, req.body);
-    return res.status(200).json(updatedCollection);
+    return res.status(201).json(updatedCollection);
   } catch (err) {
     return res.status(400).json({ err: 'Bad request', message: err.message });
   }
@@ -88,7 +88,7 @@ collectionsRouter.post('/:id/clubs', async (req, res) => {
   const { clubs } = req.body;
   try {
     const collection = await addClubsToCollection(collectionId, userId, clubs);
-    return res.status(200).json(collection);
+    return res.status(201).json(collection);
   } catch (err) {
     return res.status(400).json({ error: 'Bad request', message: err.message });
   }
