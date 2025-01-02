@@ -111,6 +111,9 @@ export async function getCollectionsByName(name, userId) {
 /* eslint-enable prefer-template */
 
 export async function addPlayersToCollection(collectionId, userId, playerIds) {
+  if (!Array.isArray(playerIds)) {
+    throw new Error('Items to add/remove must be in an array');
+  }
   const playersArray = playerIds.map((playerId) => ({ collectionId, playerId }));
   const collection = await db
     .select()
@@ -130,6 +133,9 @@ export async function addPlayersToCollection(collectionId, userId, playerIds) {
 }
 
 export async function addClubsToCollection(collectionId, userId, clubIds) {
+  if (!Array.isArray(clubIds)) {
+    throw new Error('Items to add/remove must be in an array');
+  }
   const clubsArray = clubIds.map((clubId) => ({ collectionId, clubId }));
   await db.transaction(async (tx) => {
     const collection = await tx
@@ -151,6 +157,9 @@ export async function addClubsToCollection(collectionId, userId, clubIds) {
 }
 
 export async function removePlayersFromCollection(collectionId, userId, playerIds) {
+  if (!Array.isArray(playerIds)) {
+    throw new Error('Items to add/remove must be in an array');
+  }
   await db.transaction(async (tx) => {
     const collection = await tx
       .select()
@@ -171,6 +180,9 @@ export async function removePlayersFromCollection(collectionId, userId, playerId
 }
 
 export async function removeClubsFromCollection(collectionId, userId, clubIds) {
+  if (!Array.isArray(clubIds)) {
+    throw new Error('Items to add/remove must be in an array');
+  }
   await db.transaction(async (tx) => {
     const collection = await tx
       .select()
