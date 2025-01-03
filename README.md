@@ -5,7 +5,7 @@ The API leverages Express.js for server side logic and Drizzle for interactions 
 ## Features
 - Player Statistics: Access detailed stats for players, including goals, assists and more
 - Team Data: Retrieve data about clubs, such as performance metrics.
-- Collections: Users can create and manage collections of players clubs for personalized tracking.
+- Collections: Users can create and manage collections of players and clubs for personalized tracking.
 - Scraping: Data scraping regularly on the server with a Python based scraper to ensure up-to-date statistics.
 
 ## Tech Stack
